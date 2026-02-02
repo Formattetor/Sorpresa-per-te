@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Una domanda importante</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffebee;
+            overflow: hidden; /* Evita scroll se il tasto scappa fuori */
+        }
+
+        h1 {
+            color: #d32f2f;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+
+        .container {
+            position: relative;
+            width: fit-content; /* invece di 100% */
+            max-width: 500px;
+            height: 140px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* spazio tra i bottoni */
+            margin: 0 auto; /* centra il blocco */
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        #btn-si {
+            background-color: #4caf50;
+            color: white;
+            z-index: 10;
+        }
+
+        #btn-no {
+            background-color: #f44336;
+            color: white;
+            position: relative; /* resta nel flusso iniziale */
+        }
+
+        #messaggio-finale {
+            display: none;
+            color: #c2185b;
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            animation: apparsa 0.5s ease-out;
+        }
+
+        @keyframes apparsa {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="contenuto-principale">
+        <h1>Amore mio, vuoi essere la mia Valentina? ❤️</h1>
+        <div class="container">
+            <button id="btn-si" onclick="accetta()">Sì!</button>
+            <button id="btn-no" onmouseover="scappa()">No</button>
+        </div>
+    </div>
+
+    <div id="messaggio-finale">
+        Lo sapevo! 🥰 <br> ❤️ Ti amo! ❤️
+    </div>
+
+    <script>
+        function scappa() {
+            const btnNo = document.getElementById('btn-no');
+
+            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight);
+
+            btnNo.style.left = x + 'px';
+            btnNo.style.top = y + 'px';
+            btnNo.style.position = 'fixed'; // Si muove rispetto allo schermo
+        }
+
+        function accetta() {
+            document.getElementById('contenuto-principale').style.display = 'none';
+            document.getElementById('messaggio-finale').style.display = 'block';
+            
+            // Un piccolo extra: coriandoli automatici se vuoi aggiungerli (opzionale)
+            lanciaCoriandoli();
+        }
+
+        function lanciaCoriandoli() {
+            // Se vuoi un effetto wow, potresti importare una libreria esterna. 
+            // Per ora mandiamo un alert di conferma.
+            console.log("Missione compiuta!");
+        }
+    </script>
+</body>
+</html>
